@@ -15,6 +15,8 @@
 2. 띄어쓰기 금지!
 3. 하이픈(-) 금지! 
 이 조건을 벗어나는 경우엔 반드시 따옴표로 감싸주어야한다.
+ex) 객체안에 프로퍼티를 만들 때 : 'born Year': 2017,
+    새로운 프로퍼티를 추가할 때 : object['default value'] = "기본값";
 -Property Value = 모든 자료형을 사용할 수 있다.
 -객체안에 객체를 넣는것도 가능하다.
 
@@ -23,7 +25,7 @@
 *객체의 프로퍼티에 접근하기 위한 방법.
 -점 표기법 (objectName.propertyName)
 ex) console.log(codeit.bornYear);
--대괄호 표기법 (objectName.['propertyName'])
+-대괄호 표기법 (objectName['property name'])
 -객체안의 객체에 접근하는 방법
 ex) console.log(codeit.bestCourse.title);
 
@@ -270,6 +272,7 @@ for (let 변수 of 배열) {
 <!-- 자료형 심화 -->
 #다양한 숫자 표기법
 -let millionaire = 1000000000; === let myNumber = 1e9; // 지수 표기법
+-지수 표기법은 컴퓨터 뿐만 아니라 과학, 공학, 수학처럼 숫자를 다루는 다양한 분야에서 아주 큰 수나 작은 수를 표기하는 방법 중 하나이다.
 -알파벳 e 오른쪽 값이 음수가 되면 이 숫자만큼 10의 거듭제곱으로 나누라는 의미이다. -> (-9.1e-5 === -0.000091);
 // 숫자 표기법
 // 16진법 (Hexadecimal)
@@ -288,7 +291,7 @@ let myNumber = 0.3591;
 -소수를 다룰 때 사용하는 메소드. 파라미터로 숫자값을 전달해주면 그만큼 소숫점 아래의 자릿수를 고정해주는 메소드이다.
 console.log(myNumber.toFixed(3));
 -파라미터로 전달하는 값이 숫자값의 자릿수를 초과하게되면 0으로 대체된다.
--주의해야할점 -> 이렇게 계산된 값이 문자열이다. 
+-주의해야할점 -> toFixed 메소드를 사용해 계산된 값은 문자열이다. 
 -이 메소드로 수정된 값을 숫자로 사용하고 싶을때는 number 함수를 이용해서 숫자로 형변환을 해줘야한다.
 console.log(typeof Number(myNumber.toFixed(3)));
 -자바스크립트에서는 어떤 값 앞에 +기호를 붙여주면 number 함수와 똑같은 결과를 얻을수 있다.
@@ -305,8 +308,8 @@ console.log(myNumber.toString(16)); -> ff
 -숫자형 메소드를 사용할 때 주의해야할 점 : 숫자에 바로 메소드를 사용할 수도 있는데, 숫자를 그냥 적으면 에러가 발생한다.
 정수에 바로 점을 찍게되면 소숫점으로 인식하기 때문. 
 -> 정수 형태의 숫자 값에는 메소드를 사용할 때  
-1.반드시 점 두개를 사용해야한다.
-2.양 옆에 괄호를 감싸준다.
+1.반드시 점 두개를 사용하거나, 255..
+2.양 옆을 괄호()로 감싸준다.
 
 #Math 객체
 -절댓값 (Absolute Number) : 어떤 값의 '양수(positive number)' 버전.
@@ -356,13 +359,13 @@ console.log(sum); -> 0.30000000000004 ?!
 -오차를 해결하는 방법
 1.toFixed() 메소드 사용하기 
 toFixed 값은 문자열이기 때문에 숫자로 형변환을 해주어야한다.
-=console.log(Number(sum.toFixed(1)));
-=console.log(+sum.toFixed(1));
+-> console.log(Number(sum.toFixed(1))); Number 메소드 사용하기
+-> console.log(+sum.toFixed(1)); + 붙여주기
 2.Math.round() 메소드 사용하기
 =console.log(Math.round(sum * 10) / 10);
 
 #문자열 심화
--자바스크립트에서는 문자열도 객체처럼 다룰 수 있다.
+-자바스크립트에서는 문자열도 객체처럼 다룰 수 있다. 문자열은 배열과 비슷한 부분이 많다.
 // String 
 myString = 'Hi codeit';
 
@@ -412,8 +415,8 @@ for (let str of myString) {
 let myString = 'Codeit';
 let myArray = ['C', 'o', 'd', 'e', 'i', 't'];
 
-console.log(typeof myString); -> string
-console.log(typeof myArray); -> object
+console.log(typeof myString); -> string (문자열은 string(문자))
+console.log(typeof myArray); -> object (배열은 object(객체))
 -typeof 연산자를 사용해서 두 값의 자료형을 비교해보면, string과 object, 확실히 서로 다른 자료형인걸 확인할 수 있고,
 
 console.log(myString === myArray); -> false
@@ -438,9 +441,9 @@ console.log(myString); -> Codeit
 #기본형과 참조형
 -자료형 (Date Type) : 기본형, 참조형
 -Number String Null Bollean undefined : 기본형 (Primitive Type)
-변수이름( 기본형 값 ) : 변수에 기본형 값을 다루는 방식은 모두 똑같다.
+: 변수에 기본형 값을 다루는 방식은 모두 똑같다. ex) let x = 3;
 -Object : 참조형 (Reference Type)
-변수에 객체를 할당하면 변수에 객체가 담기는 것이 아니라 그 객체를 가지고 있는 주소값이 담기는 것이다.
+: 변수에 객체를 할당하면 변수에 객체가 담기는 것이 아니라 그 객체를 가지고 있는 주소값이 담기는 것이다. ex) let x = {name: "codeit"};
 -> 기본형 값을 변수에 담아 사용할 때는 값이 그대로 할당되고, 참조형 값을 변수에 담아 사용할 때는 해당 객체를 가리키는 주소값이 할당된다.
 
 #참조형 복사하기
@@ -449,7 +452,7 @@ console.log(myString); -> Codeit
 // 참조형 복사하기 (Reference Type Copy)
 // 배열일 때
 let numbers1 = [1, 2, 3];
-let numbers2 = numbers1.silce(); -> silce() 괄호 안에 아무 숫자도 넣지 않으면 배열의 처음부터 끝까지 가져온다.
+let numbers2 = numbers1.silce(); -> silce() : 괄호 안에 아무 숫자도 넣지 않으면 배열의 처음부터 끝까지 리턴 값으로 받아온다.
 
 numbers2.push(4);
 
@@ -640,3 +643,4 @@ function sayHi() {
 #팰린드롬
 -"토마토"와 "기러기"처럼 거꾸로 읽어도 똑같은 단어를 "팰린드롬(palindrome)"이라고 부른다.
 -복습하기!
+
